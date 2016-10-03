@@ -6,7 +6,6 @@ public class CarTuner : MonoBehaviour
     public CarMovement MyCarMovement;
 
     [Header("Tuning Values")]
-    public float MaxVelocity;
     public float TurningRate;
     public float MaxAngularVelocity;
     public float BrakeStrength;

@@ -3,11 +3,11 @@
 public class CarMovement : MonoBehaviour
 {
     private float _acceleration;
-    private float _maxForce;
     private float _brakeForce;
     private float _force;
-    private float _turnForce;
     private float _maxAngularVelocityForTurn;
+    private float _maxForce;
+    private float _turnForce;
     public Rigidbody2D Rigidbody2D;
 
     private void Start()
@@ -15,7 +15,8 @@ public class CarMovement : MonoBehaviour
         if (!Rigidbody2D) Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    public void SetTuningValues(float accel, float maxForce, float brake, float mass, float linearDrag, float turnForce, float angularDrag, float maxAngularVel)
+    public void SetTuningValues(float accel, float maxForce, float brake, float mass, float linearDrag, float turnForce,
+        float angularDrag, float maxAngularVel)
     {
         _acceleration = accel;
         _brakeForce = brake;
@@ -50,7 +51,8 @@ public class CarMovement : MonoBehaviour
 
         if (Input.GetButton("Horizontal"))
         {
-            if (Mathf.Abs(Rigidbody2D.angularVelocity) < _maxAngularVelocityForTurn) Rigidbody2D.AddTorque(-Input.GetAxis("Horizontal")*_turnForce);
+            if (Mathf.Abs(Rigidbody2D.angularVelocity) < _maxAngularVelocityForTurn)
+                Rigidbody2D.AddTorque(-Input.GetAxis("Horizontal")*_turnForce);
         }
         return new Vector2(0, _force);
     }
@@ -58,12 +60,5 @@ public class CarMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Rigidbody2D.AddRelativeForce(TurnMode(), ForceMode2D.Force);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        //Gizmos.color = Color.green;
-        //Gizmos.DrawWireSphere(transform.position + new Vector3(_steerVector.x,_steerVector.y, transform.position.z).normalized, 0.2f);
     }
 }
